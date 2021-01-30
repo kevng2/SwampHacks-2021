@@ -35,13 +35,13 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
     private FirebaseDatabase database;
     private FirebaseStorage storage;
+    RecyclerView recyclerView;
+    static List<Item> itemList = new ArrayList<>();
+    static boolean cached = false;
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
-    RecyclerView recyclerView;
-    List<Item> itemList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,47 +68,49 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //initData();
+        if (!cached) {
+            // Populate items using the Realtime Database
+            DatabaseReference itemsRef = database.getReference("item/");
 
-        // Populate items using the Realtime Database
-        DatabaseReference itemsRef = database.getReference("item/");
+            itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                itemList = new ArrayList<>();
+                    List<Map> data = (List<Map>) dataSnapshot.getValue();
 
-                List<Map> data = (List<Map>) dataSnapshot.getValue();
+                    for (Map<String, Object> item : data) {
+                        String name = item.get("name").toString();
+                        String condition = item.get("condition").toString();
+                        String description = item.get("description").toString();
+                        String imageFileName = item.get("image").toString();
+                        String status = item.get("status").toString();
 
-                for (Map<String, Object> item : data) {
-                    String name = item.get("name").toString();
-                    String condition = item.get("condition").toString();
-                    String description = item.get("description").toString();
-                    String imageFileName = item.get("image").toString();
-                    String status = item.get("status").toString();
+                        final Drawable[] image = new Drawable[1];
+                        StorageReference imageRef = storage.getReference("items/" +
+                                imageFileName);
 
-                    final Drawable[] image = new Drawable[1];
-                    StorageReference imageRef = storage.getReference("items/" +
-                            imageFileName);
-
-                    final long ONE_MEGABYTE = 1024 * 1024 * 1;
-                    imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
-                            image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                            itemList.add(new Item(name, condition, description, image[0],
-                                    status));
-                            recyclerView.setAdapter(new Adapter(itemList));
-                        }
-                    });
+                        final long ONE_MEGABYTE = 1024 * 1024 * 1;
+                        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                                itemList.add(new Item(name, condition, description, image[0],
+                                        status));
+                                recyclerView.setAdapter(new Adapter(itemList));
+                            }
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Error", "DATABASE ERROR");
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("Error", "DATABASE ERROR");
+                }
+            });
+        }
+        else recyclerView.setAdapter(new Adapter(itemList));
 
+        cached = true;
         return view;
     }
 
