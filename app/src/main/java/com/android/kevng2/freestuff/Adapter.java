@@ -8,19 +8,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
-    private List<Item> mData;
+import timber.log.Timber;
 
+public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
+    private final List<Item> mData;
     public Adapter(List<Item> mData) {
         this.mData = mData;
     }
-
     private Context mContext;
 
     @NonNull
@@ -51,18 +54,27 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         return mData.size();
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder {
-
+    public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView ivItem;
         TextView tvTitle, tvStatus, tvCondition, tvDescription;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             ivItem = itemView.findViewById(R.id.ivItem);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvStatus = itemView.findViewById(R.id.tvStatus);
             tvCondition = itemView.findViewById(R.id.tvCondition);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+        }
+
+        public void onClick(View v) {
+            Timber.d("onClick");
+            NavHostFragment navHostFragment = (NavHostFragment) ((FragmentActivity) mContext)
+                    .getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment);
+            NavController controller = navHostFragment.getNavController();
+            controller.navigate(R.id.action_homeFragment_to_itemFragment);
         }
     }
 }
