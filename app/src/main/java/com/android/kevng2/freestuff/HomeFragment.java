@@ -90,8 +90,8 @@ public class HomeFragment extends Fragment {
                     StorageReference imageRef = storage.getReference("items/" +
                             imageFileName);
 
-                    final long SIXTEEN_MEGABYTES = 1024 * 1024 * 16;
-                    imageRef.getBytes(SIXTEEN_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    final long ONE_MEGABYTE = 1024 * 1024 * 1;
+                    imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
                             image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
