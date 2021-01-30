@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "458744218841",
+    "firebase_url": "https://freestuff-fc598-default-rtdb.firebaseio.com",
+    "project_id": "freestuff-fc598",
+    "storage_bucket": "freestuff-fc598.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458744218841:android:4921bdcec41d9915432ac8",
+        "android_client_info": {
+          "package_name": "com.android.kevng2.freestuff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458744218841-oc78mapkp2mhaurq7sfqanerkfr2g1u4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4ClyClWwZpSWqANmpFyovID3naom7W8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458744218841-oc78mapkp2mhaurq7sfqanerkfr2g1u4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
