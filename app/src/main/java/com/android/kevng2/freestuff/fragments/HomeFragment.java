@@ -1,4 +1,4 @@
-package com.android.kevng2.freestuff;
+package com.android.kevng2.freestuff.fragments;
 
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.kevng2.freestuff.Adapter;
+import com.android.kevng2.freestuff.Item;
+import com.android.kevng2.freestuff.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -79,7 +82,7 @@ public class HomeFragment extends Fragment {
 
             itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     List<Map> data = (List<Map>) dataSnapshot.getValue();
 
@@ -98,15 +101,12 @@ public class HomeFragment extends Fragment {
                         StorageReference imageRef = storage.getReference("items/" +
                                 imageFileName);
 
-                        final long ONE_MEGABYTE = 1024 * 1024 * 1;
-                        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                            @Override
-                            public void onSuccess(byte[] bytes) {
-                                image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                                itemList.add(new Item(name, condition, description, image[0],
-                                        status, lat, lng));
-                                recyclerView.setAdapter(new Adapter(itemList));
-                            }
+                        final long ONE_MEGABYTE = 1024 * 1024;
+                        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
+                            image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                            itemList.add(new Item(name, condition, description, image[0],
+                                    status, lat, lng));
+                            recyclerView.setAdapter(new Adapter(itemList));
                         });
                     }
                 }

@@ -14,13 +14,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
-    private List<Item> mData;
-
+public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> implements View.OnClickListener {
+    private final List<Item> mData;
     public Adapter(List<Item> mData) {
         this.mData = mData;
     }
-
     private Context mContext;
 
     @NonNull
@@ -49,6 +47,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder {
