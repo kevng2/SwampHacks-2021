@@ -1,12 +1,19 @@
 package com.android.kevng2.freestuff;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -15,6 +22,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 public class MapsFragment extends Fragment {
 
@@ -35,6 +44,19 @@ public class MapsFragment extends Fragment {
                 LatLng pos = new LatLng(i.getLat(), i.getLng());
                 googleMap.addMarker(new MarkerOptions().position(pos).title(i.getName()));
             }
+
+            if (ActivityCompat.checkSelfPermission(getContext(),
+                    android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(getContext(),
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        264);
+            } else {
+                Log.e("DB", "PERMISSION GRANTED");
+            }
+
+            googleMap.setMyLocationEnabled(true);
         }
     };
 

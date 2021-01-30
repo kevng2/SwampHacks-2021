@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
+
         // recyclerView = getActivity().findViewById(R.id.rvList);
 
         //Adapter adapter = new Adapter(getActivity(), mlist);
@@ -103,7 +104,7 @@ public class HomeFragment extends Fragment {
                             @Override
                             public void onSuccess(byte[] bytes) {
                                 image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                                itemList.add(new Item(name, condition, description, image[0],
+                                itemList.add(new Item(name, description, condition, image[0],
                                         status, lat, lng));
                                 recyclerView.setAdapter(new Adapter(itemList));
                             }
