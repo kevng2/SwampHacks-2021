@@ -1,18 +1,20 @@
 package com.android.kevng2.freestuff;
 
+import android.graphics.drawable.Drawable;
+
 public class Item {
     private String name;
     private String description;
     private String condition;
-    private String imageFileName;
+    private Drawable image;
     private String status;
 
     public Item(String name, String description, String condition,
-                String imageFileName, String status) {
+                Drawable image, String status) {
         this.name = name;
         this.description = description;
         this.condition = condition;
-        this.imageFileName = imageFileName;
+        this.image = image;
         this.status = status;
     }
 
@@ -40,8 +42,8 @@ public class Item {
 //        this.condition = condition;
 //    }
 
-    public String getImageFileName() {
-        return imageFileName;
+    public Drawable getImage() {
+        return image;
     }
 
 //    public void setImageFileName(String imageFileName) {

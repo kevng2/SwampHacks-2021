@@ -1,5 +1,8 @@
 package com.android.kevng2.freestuff;
 
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +14,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,7 @@ import java.util.Map;
  */
 public class HomeFragment extends Fragment {
     private FirebaseDatabase database;
+    private FirebaseStorage storage;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -40,6 +47,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
+        storage = FirebaseStorage.getInstance();
         // recyclerView = getActivity().findViewById(R.id.rvList);
 
         //Adapter adapter = new Adapter(getActivity(), mlist);
@@ -78,11 +86,21 @@ public class HomeFragment extends Fragment {
                     String imageFileName = item.get("image").toString();
                     String status = item.get("status").toString();
 
-                    itemList.add(new Item(name, condition, description, imageFileName,
-                            status));
-                }
+                    final Drawable[] image = new Drawable[1];
+                    StorageReference imageRef = storage.getReference("items/" +
+                            imageFileName);
 
-                recyclerView.setAdapter(new Adapter(itemList));
+                    final long SIXTEEN_MEGABYTES = 1024 * 1024 * 16;
+                    imageRef.getBytes(SIXTEEN_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                        @Override
+                        public void onSuccess(byte[] bytes) {
+                            image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                            itemList.add(new Item(name, condition, description, image[0],
+                                    status));
+                            recyclerView.setAdapter(new Adapter(itemList));
+                        }
+                    });
+                }
             }
 
             @Override

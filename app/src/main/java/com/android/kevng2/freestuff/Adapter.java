@@ -32,7 +32,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
 
-//        holder.ivItem.setImageResource(mData.get(position).getImage());
+        holder.ivItem.setImageDrawable(mData.get(position).getImage());
         holder.tvTitle.setText(mData.get(position).getName());
         holder.tvStatus.setText(mData.get(position).getStatus());
         holder.tvCondition.setText(mData.get(position).getCondition());
