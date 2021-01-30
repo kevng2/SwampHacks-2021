@@ -36,9 +36,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         Glide
                 .with(mContext)
                 .load(mData.get(position).getImage())
-                .override(300)
+                .override(200)
                 .fitCenter()
-                .centerCrop()
                 .into(holder.ivItem);
 
         holder.tvTitle.setText(mData.get(position).getName());
