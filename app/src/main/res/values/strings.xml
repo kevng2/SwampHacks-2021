@@ -7,4 +7,5 @@
     <string name="chat">Chat</string>
     <string name="history">History</string>
     <string name="settings">Settings</string>
+    <string name="image_description">An image of the item</string>
 </resources>

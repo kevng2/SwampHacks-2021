@@ -1,6 +1,7 @@
 package com.android.kevng2.freestuff;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         holder.tvStatus.setText(mData.get(position).getStatus());
         holder.tvCondition.setText(mData.get(position).getCondition());
         holder.tvDescription.setText(mData.get(position).getDescription());
+        holder.id = mData.get(position).getId();
     }
 
     @Override
@@ -55,6 +57,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        int id;
         ImageView ivItem;
         TextView tvTitle, tvStatus, tvCondition, tvDescription;
 
@@ -69,12 +72,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         }
 
         public void onClick(View v) {
-            Timber.d("onClick");
-            NavHostFragment navHostFragment = (NavHostFragment) ((FragmentActivity) mContext)
-                    .getSupportFragmentManager()
-                    .findFragmentById(R.id.fragment);
-            NavController controller = navHostFragment.getNavController();
-            controller.navigate(R.id.action_homeFragment_to_itemFragment);
         }
     }
 }

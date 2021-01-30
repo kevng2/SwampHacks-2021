@@ -3,6 +3,7 @@ package com.android.kevng2.freestuff;
 import android.graphics.drawable.Drawable;
 
 public class Item {
+    private int id;
     private String name;
     private String description;
     private String condition;
@@ -11,8 +12,9 @@ public class Item {
     private double lat;
     private double lng;
 
-    public Item(String name, String description, String condition,
+    public Item(int id, String name, String description, String condition,
                 Drawable image, String status, double lat, double lng) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.condition = condition;
@@ -21,6 +23,8 @@ public class Item {
         this.lat = lat;
         this.lng = lng;
     }
+
+    public int getId() { return id; }
 
     public String getName() {
         return name;

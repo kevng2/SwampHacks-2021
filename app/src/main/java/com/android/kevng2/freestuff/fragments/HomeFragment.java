@@ -91,7 +91,8 @@ public class HomeFragment extends Fragment {
                     List<Map> data = (List<Map>) dataSnapshot.getValue();
 
                     // Go through each of the items
-                    for (Map<String, Object> item : data) {
+                    for (int i = 0; i < data.size(); ++i) {
+                        Map<String, Object> item = (Map<String, Object>) data.get(i);
                         String name = item.get("name").toString();
                         String condition = item.get("condition").toString();
                         String description = item.get("description").toString();
@@ -106,9 +107,10 @@ public class HomeFragment extends Fragment {
                                 imageFileName);
 
                         final long ONE_MEGABYTE = 1024 * 1024;
+                        int finalI = i;
                         imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
                             image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                            itemList.add(new Item(name, condition, description, image[0],
+                            itemList.add(new Item(finalI, name, condition, description, image[0],
                                     status, lat, lng));
                             mAdapter.notifyDataSetChanged();
                         });
