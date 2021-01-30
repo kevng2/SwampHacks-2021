@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import timber.log.Timber;
+
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
@@ -45,6 +47,8 @@ public class HomeFragment extends Fragment {
 
     // Indicates whether the item list has been downloaded yet
     static boolean cached = false;
+
+    Adapter mAdapter = new Adapter(itemList);
 
     public HomeFragment() {
         // Required empty public constructor
@@ -67,14 +71,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         recyclerView = view.findViewById(R.id.rvList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(mAdapter);
 
-        //initData();
+        // initData();
         // If we already have the items cached in the itemList
         if (!cached) {
             // Populate items using the Realtime Database
@@ -106,20 +110,22 @@ public class HomeFragment extends Fragment {
                             image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                             itemList.add(new Item(name, condition, description, image[0],
                                     status, lat, lng));
-                            recyclerView.setAdapter(new Adapter(itemList));
+                            mAdapter.notifyDataSetChanged();
                         });
                     }
                 }
 
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("Error", "DATABASE ERROR");
+                    Timber.e("DATABASE ERROR");
                 }
             });
         }
+
         // If we already loaded the data don't load it again, just set the adapter to the list
         // we've already populated
-        else recyclerView.setAdapter(new Adapter(itemList));
+        else recyclerView.setAdapter(mAdapter);
 
         cached = true;
         return view;
