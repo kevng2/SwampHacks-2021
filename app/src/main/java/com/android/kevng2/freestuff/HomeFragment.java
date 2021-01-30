@@ -36,7 +36,11 @@ public class HomeFragment extends Fragment {
     private FirebaseDatabase database;
     private FirebaseStorage storage;
     RecyclerView recyclerView;
+    // Keep the itemList static for caching purposes (not having to load all the images again
+    // on loads after the first one
     static List<Item> itemList = new ArrayList<>();
+
+    // Indicates whether the item list has been downloaded yet
     static boolean cached = false;
 
     public HomeFragment() {
@@ -68,6 +72,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         //initData();
+        // If we already have the items cached in the itemList
         if (!cached) {
             // Populate items using the Realtime Database
             DatabaseReference itemsRef = database.getReference("item/");
@@ -78,6 +83,7 @@ public class HomeFragment extends Fragment {
 
                     List<Map> data = (List<Map>) dataSnapshot.getValue();
 
+                    // Go through each of the items
                     for (Map<String, Object> item : data) {
                         String name = item.get("name").toString();
                         String condition = item.get("condition").toString();
@@ -85,6 +91,7 @@ public class HomeFragment extends Fragment {
                         String imageFileName = item.get("image").toString();
                         String status = item.get("status").toString();
 
+                        // Get the image from Firebase Cloud Storage
                         final Drawable[] image = new Drawable[1];
                         StorageReference imageRef = storage.getReference("items/" +
                                 imageFileName);
@@ -108,6 +115,8 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+        // If we already loaded the data don't load it again, just set the adapter to the list
+        // we've already populated
         else recyclerView.setAdapter(new Adapter(itemList));
 
         cached = true;
