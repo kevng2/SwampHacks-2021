@@ -1,62 +1,58 @@
 package com.android.kevng2.freestuff;
 
 public class Item {
+    private String name;
+    private String description;
+    private String condition;
+    private String imageFileName;
+    private String status;
 
-    int image;
-    String itemName;
-    String description;
-    String Condition;
-    String status;
-
-    public Item() {
-
-    }
-
-    public Item(int image, String itemName, String description, String condition, String status) {
-        this.image = image;
-        this.itemName = itemName;
+    public Item(String name, String description, String condition,
+                String imageFileName, String status) {
+        this.name = name;
         this.description = description;
-        Condition = condition;
+        this.condition = condition;
+        this.imageFileName = imageFileName;
         this.status = status;
     }
 
-    public int getImage() {
-        return image;
+    public String getName() {
+        return name;
     }
 
-    public void setImage(int image) {
-        this.image = image;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
 
     public String getCondition() {
-        return Condition;
+        return condition;
     }
 
-    public void setCondition(String condition) {
-        Condition = condition;
+//    public void setCondition(String condition) {
+//        this.condition = condition;
+//    }
+
+    public String getImageFileName() {
+        return imageFileName;
     }
+
+//    public void setImageFileName(String imageFileName) {
+//        this.imageFileName = imageFileName;
+//    }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
 }
