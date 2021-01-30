@@ -1,6 +1,7 @@
 package com.android.kevng2.freestuff;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         }
 
         public void onClick(View v) {
+            Intent intent = new Intent(mContext, ItemDetailActivity.class);
+            mContext.startActivity(intent);
         }
     }
 }
