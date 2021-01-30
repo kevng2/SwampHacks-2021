@@ -1,5 +1,6 @@
 package com.android.kevng2.freestuff;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,36 +10,41 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
-
-    List<Item> mData;
+    private List<Item> mData;
 
     public Adapter(List<Item> mData) {
         this.mData = mData;
     }
 
+    private Context mContext;
+
     @NonNull
     @Override
     public Adapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item, parent, false);
-        myViewHolder viewHolder = new myViewHolder(view);
-
-        return viewHolder;
+        mContext = parent.getContext();
+        View view = LayoutInflater.from(mContext).inflate(R.layout.activity_item, parent, false);
+        return new myViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+        Glide
+                .with(mContext)
+                .load(mData.get(position).getImage())
+                .override(300)
+                .fitCenter()
+                .centerCrop()
+                .into(holder.ivItem);
 
-        holder.ivItem.setImageDrawable(mData.get(position).getImage());
         holder.tvTitle.setText(mData.get(position).getName());
         holder.tvStatus.setText(mData.get(position).getStatus());
         holder.tvCondition.setText(mData.get(position).getCondition());
         holder.tvDescription.setText(mData.get(position).getDescription());
-
-
     }
 
     @Override
