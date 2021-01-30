@@ -90,6 +90,8 @@ public class HomeFragment extends Fragment {
                         String description = item.get("description").toString();
                         String imageFileName = item.get("image").toString();
                         String status = item.get("status").toString();
+                        Double lat = Double.parseDouble(item.get("lat").toString());
+                        Double lng = Double.parseDouble(item.get("lng").toString());
 
                         // Get the image from Firebase Cloud Storage
                         final Drawable[] image = new Drawable[1];
@@ -102,7 +104,7 @@ public class HomeFragment extends Fragment {
                             public void onSuccess(byte[] bytes) {
                                 image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
                                 itemList.add(new Item(name, condition, description, image[0],
-                                        status));
+                                        status, lat, lng));
                                 recyclerView.setAdapter(new Adapter(itemList));
                             }
                         });

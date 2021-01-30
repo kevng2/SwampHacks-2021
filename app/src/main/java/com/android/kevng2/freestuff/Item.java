@@ -8,14 +8,18 @@ public class Item {
     private String condition;
     private Drawable image;
     private String status;
+    private double lat;
+    private double lng;
 
     public Item(String name, String description, String condition,
-                Drawable image, String status) {
+                Drawable image, String status, double lat, double lng) {
         this.name = name;
         this.description = description;
         this.condition = condition;
         this.image = image;
         this.status = status;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public String getName() {
@@ -57,4 +61,12 @@ public class Item {
 //    public void setStatus(String status) {
 //        this.status = status;
 //    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
 }
