@@ -20,12 +20,16 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/profileFragment"
 
         android:name="com.android.kevng2.freestuff.fragments.ProfileFragment"
 
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment2"
+            app:destination="@id/settingsFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.android.kevng2.freestuff.fragments.ChatFragment"
@@ -41,4 +45,13 @@
         android:name="com.android.kevng2.freestuff.fragments.ItemFragment"
         android:label="fragment_item"
         tools:layout="@layout/fragment_item" />
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.android.kevng2.freestuff.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
