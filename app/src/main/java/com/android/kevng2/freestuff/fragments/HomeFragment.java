@@ -110,9 +110,11 @@ public class HomeFragment extends Fragment {
                         int finalI = i;
                         imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(bytes -> {
                             image[0] = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
-                            itemList.add(new Item(finalI, name, description, condition, image[0],
-                                    status, lat, lng));
-                            mAdapter.notifyDataSetChanged();
+                            if (!status.equals("Completed")) {
+                                itemList.add(new Item(finalI, name, description, condition, image[0],
+                                        status, lat, lng));
+                                mAdapter.notifyDataSetChanged();
+                            }
                         });
                     }
                 }
