@@ -69,7 +69,7 @@
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cathyy0061_gmail_com"
+                android:text="cathyy0061_gmail_com"
                 android:textSize="20sp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
         android:layout_below="@+id/LLAttributes"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/change_settings" />
+        android:text="change_settings" />
 
     <Button
         android:id="@+id/log_out_btn"
@@ -92,5 +92,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSettings"
         android:layout_marginStart="16dp"
-        android:text="@string/logout" />
+        android:text="logout" />
 </RelativeLayout>
