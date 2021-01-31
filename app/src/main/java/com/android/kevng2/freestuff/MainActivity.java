@@ -5,6 +5,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import timber.log.Timber;
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Timber.plant(new Timber.DebugTree());
+
+        // signInAccount.getDisplayName() signInAccount.getEmail()
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
         mBottomNavigationView = findViewById(R.id.bottomNavigationView);
         mNavHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
