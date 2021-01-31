@@ -6,78 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ListingFragment">
 
-    <ImageView
-        android:id="@+id/ivPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        tools:src="@tools:sample/avatars" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/itemNameField"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:hint="Item Name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="160dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/btnUpload"
+                    android:layout_marginTop="-186dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_below="@+id/itemNameField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Condition:"
+                android:textSize="16dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerCondition"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/itemNameField"
+                android:layout_toEndOf="@id/textView2"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:entries="@array/conditions" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerCondition"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Description:" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/itemDescriptionField"
+                android:layout_below="@+id/textView3"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:inputType="textMultiLine"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:inputType="textMultiLine"
+                    android:layout_height="match_parent"
+                    android:gravity="start"
+                    android:layout_below="@+id/btnUpload"/>
+
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@+id/itemDescriptionField"
+                android:id="@+id/ivPhoto"/>
+
+
+        </RelativeLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnUpload"
-        android:layout_width="209dp"
-        android:layout_height="36dp"
-        android:layout_below="@+id/ivPhoto"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
-        android:text="Upload Photo" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnUpload"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Condition:" />
-
-    <Spinner
-        android:id="@+id/spinnerCondition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:entries="@array/conditions" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerCondition"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Description:" />
-
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="0dp"
-        android:background="@android:color/transparent"
-        android:hint="Write description here!"
-        android:maxLength="300"
-        tools:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu"></EditText>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_below="@+id/etDescription"
-        android:layout_alignParentStart="true"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="25dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="291dp"
-        android:text="Location:" />
+        android:text="Item Photo" />
+
+    <Button
+        android:id="@+id/uploadItem"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="Give Away" />
+
+
 
 </RelativeLayout>

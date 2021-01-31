@@ -1,6 +1,7 @@
 package com.android.kevng2.freestuff.fragments;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,9 +29,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.kevng2.freestuff.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 import timber.log.Timber;
 
@@ -38,15 +46,19 @@ public class ListingFragment extends Fragment {
 
     private static final int RESULT_OK = 0;
     ImageView ivPhoto;
-    Button btnUpload;
+    Button btnUploadPhoto,btnUploadItem;
+    private static final int PICK_IMAGE = 100;
+    private Uri filePath;
 
-    private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
-    private static final int REQUEST_CODE_SELECT_IMAGE = 2;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,62 +72,82 @@ public class ListingFragment extends Fragment {
         conditions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(conditions);
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         //Uploading the image
         ivPhoto = view.findViewById(R.id.ivPhoto);
-        btnUpload = view.findViewById(R.id.btnUpload);
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
+        btnUploadPhoto = view.findViewById(R.id.btnUpload);
+        btnUploadItem = view.findViewById(R.id.uploadItem);
+
+        btnUploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_STORAGE_PERMISSION);
-                } else{
-                    selectImage();
-                }
+              openGallery();
             }
         });
 
+        btnUploadItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               uploadImage();
+            }
+        });
 
         return view;
     }
-    private void selectImage(){
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-            startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
-        }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Image"), 1);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == REQUEST_CODE_STORAGE_PERMISSION && grantResults.length>0){
-            if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                selectImage();
-            }else{
-                Toast.makeText(getContext(),"Permission Denied", Toast.LENGTH_SHORT).show();
-            }
+    private void uploadImage() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Uploading...");
+        progressDialog.show();
+
+        if (filePath!=null){
+            StorageReference reference = storageReference.child("images"+ UUID.randomUUID().toString());
+            reference.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(),"Image Uploaded", Toast.LENGTH_SHORT);
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
+                        }
+                    });
         }
+
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK){
-            if(data != null){
-                Uri selectedImageUri = data.getData();
-                if(selectedImageUri != null){
-                    try {
-                        InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        ivPhoto.setImageBitmap(bitmap);
 
-                        File selectedImage = new File(getPathFromUri(selectedImageUri));
 
-                    }catch (Exception exception){
-                        Toast.makeText(getContext(),exception.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+        if (requestCode == 1 && resultCode == RESULT_OK
+                  && data!= null && data.getData()!= null){
+            filePath = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),filePath);
+                ivPhoto.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            //ivPhoto.setImageURI(filePath);
         }
     }
 
