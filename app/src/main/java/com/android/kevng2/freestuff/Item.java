@@ -2,7 +2,10 @@ package com.android.kevng2.freestuff;
 
 import android.graphics.drawable.Drawable;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
+    private static final long serialVersionUID = 1100231L;
     private int id;
     private String name;
     private String description;

@@ -2,6 +2,8 @@ package com.android.kevng2.freestuff;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import timber.log.Timber;
@@ -50,6 +53,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         holder.tvCondition.setText(mData.get(position).getCondition());
         holder.tvDescription.setText(mData.get(position).getDescription());
         holder.id = mData.get(position).getId();
+        holder.mDataIndex = position;
     }
 
     @Override
@@ -58,7 +62,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        // Because it is asynchronous how items appear in the list, there are two indexes,
+        // the mDataIndex is the position of the item in the list view, and the id is the database
+        // id of the item used by Firebase.
         int id;
+        int mDataIndex;
+
         ImageView ivItem;
         TextView tvTitle, tvStatus, tvCondition, tvDescription;
 
@@ -73,7 +82,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         }
 
         public void onClick(View v) {
+            Item item = mData.get(mDataIndex);
+
             Intent intent = new Intent(mContext, ItemDetailActivity.class);
+
+            intent.putExtra("id", id);
+            intent.putExtra("name", item.getName());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("condition", item.getCondition());
+            intent.putExtra("status", item.getStatus());
+            intent.putExtra("lat", item.getLat());
+            intent.putExtra("lng", item.getLng());
+
+            // Put image in serializable form
+            Bitmap bitmap = ((BitmapDrawable)item.getImage()).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] bitmapdata = baos.toByteArray();
+            intent.putExtra("image", bitmapdata);
+
             mContext.startActivity(intent);
         }
     }
