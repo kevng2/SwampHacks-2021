@@ -37,24 +37,19 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         btnSettings = view.findViewById(R.id.btnSettings);
         btnLogout = view.findViewById(R.id.log_out_btn);
-        btnLogout.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-        });
+        btnLogout.setOnClickListener(v -> FirebaseAuth.getInstance().signOut());
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
 
         tvName.setText(signInAccount.getDisplayName());
         tvEmail.setText(signInAccount.getEmail());
 
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment navHostFragment = (NavHostFragment) getActivity()
-                        .getSupportFragmentManager()
-                        .findFragmentById(R.id.fragment);
-                NavController controller = navHostFragment.getNavController();
-                controller.navigate(R.id.action_profileFragment_to_settingsFragment2);
-            }
+        btnSettings.setOnClickListener(v -> {
+            NavHostFragment navHostFragment = (NavHostFragment) getActivity()
+                    .getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment);
+            NavController controller = navHostFragment.getNavController();
+            controller.navigate(R.id.action_profileFragment_to_settingsFragment2);
         });
 
         return view;

@@ -49,9 +49,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                 .into(holder.ivItem);
 
         holder.tvTitle.setText(mData.get(position).getName());
-        holder.tvStatus.setText(mData.get(position).getStatus());
+        //holder.tvStatus.setText(mData.get(position).getStatus());
         holder.tvCondition.setText(mData.get(position).getCondition());
-        holder.tvDescription.setText(mData.get(position).getDescription());
+        //holder.tvDescription.setText(mData.get(position).getDescription());
         holder.id = mData.get(position).getId();
         holder.mDataIndex = position;
     }
@@ -76,9 +76,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
             itemView.setOnClickListener(this);
             ivItem = itemView.findViewById(R.id.ivItem);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvStatus = itemView.findViewById(R.id.tvStatus);
+            //tvStatus = itemView.findViewById(R.id.tvStatus);
             tvCondition = itemView.findViewById(R.id.tvCondition);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
+            //tvDescription = itemView.findViewById(R.id.tvDescription);
         }
 
         public void onClick(View v) {
