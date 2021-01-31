@@ -15,9 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.kevng2.freestuff.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
-
+    private Button btnLogout;
     Button btnSettings;
 
     @Override
@@ -31,6 +32,10 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         btnSettings = view.findViewById(R.id.btnSettings);
+        btnLogout = view.findViewById(R.id.log_out_btn);
+        btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+        });
 
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
