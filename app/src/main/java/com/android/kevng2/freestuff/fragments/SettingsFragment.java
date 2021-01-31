@@ -41,15 +41,12 @@ public class SettingsFragment extends Fragment {
         etName = view.findViewById(R.id.etName);
         etEmail = view.findViewById(R.id.etEmail);
 
-        btnSave.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                NavHostFragment navHostFragment = (NavHostFragment) getActivity()
-                        .getSupportFragmentManager()
-                        .findFragmentById(R.id.fragment);
-                NavController controller = navHostFragment.getNavController();
-                controller.navigate(R.id.action_settingsFragment2_to_profileFragment);
-            }
+        btnSave.setOnClickListener(v -> {
+            NavHostFragment navHostFragment = (NavHostFragment) getActivity()
+                    .getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment);
+            NavController controller = navHostFragment.getNavController();
+            controller.navigate(R.id.action_settingsFragment2_to_profileFragment);
         });
         return view;
     }

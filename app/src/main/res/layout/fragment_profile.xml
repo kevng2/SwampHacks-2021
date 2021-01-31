@@ -42,15 +42,15 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_person"
-                android:layout_marginLeft="70dp"
+                android:layout_marginStart="16dp"
                 />
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cathy Yue"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"
+                android:text="@string/cathy_yue"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 />
         </LinearLayout>
@@ -63,16 +63,16 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:src="@drawable/ic_email"
-                android:layout_marginLeft="70dp"
+                android:layout_marginStart="16dp"
                 />
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="cathyy0061@gmail.com"
-                android:textSize="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
+                android:text="@string/cathyy0061_gmail_com"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -82,13 +82,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/LLAttributes"
-        android:layout_marginLeft="70dp"
-        android:text="Change Settings" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/change_settings" />
 
     <Button
         android:id="@+id/log_out_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSettings"
-        android:text="Logout"/>
+        android:layout_marginStart="16dp"
+        android:text="@string/logout" />
 </RelativeLayout>
