@@ -27,18 +27,6 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="141dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgItem"
-        tools:context=".fragments.MapsFragment" />
-
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="wrap_content"
@@ -47,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map" />
+        app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
     <TextView
         android:id="@+id/txtDescription"
@@ -63,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:onClick="btnClickPickup"
         android:text="@string/btn_pick_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,10 +61,21 @@
         android:id="@+id/txtCondition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/imgItem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgItem"
         app:layout_constraintTop_toTopOf="@+id/imgItem" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:apiKey="AIzaSyCZ-Fcr4ilJOfbNFTB5xzbiCvNJ4W4CZRY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
