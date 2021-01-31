@@ -5,10 +5,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import timber.log.Timber;
 
@@ -31,5 +34,16 @@ public class MainActivity extends AppCompatActivity {
         if (mNavHostFragment != null)
             mNavController =  mNavHostFragment.getNavController();
         NavigationUI.setupWithNavController(mBottomNavigationView, mNavController);
+
+        //Code for the floating action button
+        FloatingActionButton  fabAddListing = findViewById(R.id.fabAddListing);
+        fabAddListing.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(MainActivity.this,"FAB Clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
