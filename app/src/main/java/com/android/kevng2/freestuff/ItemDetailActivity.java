@@ -128,6 +128,8 @@ public class ItemDetailActivity extends AppCompatActivity {
     }
 
     public void btnClickPickup(View view) {
-        DatabaseReference itemRef = database.getReference("item/" + String.valueOf(id));
+        DatabaseReference itemRef = database.getReference("item/" + String.valueOf(id) + "/");
+        itemRef.child("status").setValue("Completed");
+        btnPickup.setEnabled(false);
     }
 }
