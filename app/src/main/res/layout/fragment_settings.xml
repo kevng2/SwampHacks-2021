@@ -89,6 +89,6 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="change_settings" />
+        android:text="@string/change_settings" />
 
 </LinearLayout>

@@ -22,16 +22,7 @@
         android:requestLegacyExternalStorage="true"
         >
 
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
         <activity android:name=".LoginActivity" />
-
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashScreen">
@@ -53,8 +44,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ItemDetailActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ItemDetailActivity" />
+
     </application>
 
 </manifest>

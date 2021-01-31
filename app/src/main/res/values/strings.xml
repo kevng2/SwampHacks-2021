@@ -11,9 +11,14 @@
     <string name="btn_pick_up">Pick Up</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="hello_world">Hello Square World!</string>
-    <string name="cathy_yue">cathy yue</string>
+    <string name="cathy_yue">Cathy Yue</string>
+    <string name="cathyy0061_gmail_com">cathyy0061@gmail.com</string>
+    <string name="change_settings">Change Settings</string>
+    <string name="logout">Logout</string>
     <string name="name">Name</string>
-
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="profile">Profile</string>
 
     <string-array name="conditions">
         <item>New</item>
