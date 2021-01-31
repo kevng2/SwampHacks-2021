@@ -11,4 +11,11 @@
     <string name="btn_pick_up">Pick Up</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="hello_world">Hello Square World!</string>
+
+    <string-array name="conditions">
+        <item>New</item>
+        <item>Like New</item>
+        <item>Used</item>
+        <item>Refurbished</item>
+    </string-array>
 </resources>

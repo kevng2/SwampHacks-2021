@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_itemFragment"
             app:destination="@id/itemFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listingFragment"
+            app:destination="@id/listingFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -54,4 +57,9 @@
             android:id="@+id/action_settingsFragment2_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/listingFragment"
+        android:name="com.android.kevng2.freestuff.fragments.ListingFragment"
+        android:label="fragment_listing"
+        tools:layout="@layout/fragment_listing" />
 </navigation>

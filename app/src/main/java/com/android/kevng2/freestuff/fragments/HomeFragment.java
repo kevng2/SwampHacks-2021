@@ -8,17 +8,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.kevng2.freestuff.Adapter;
 import com.android.kevng2.freestuff.Item;
+import com.android.kevng2.freestuff.MainActivity;
 import com.android.kevng2.freestuff.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -130,6 +138,21 @@ public class HomeFragment extends Fragment {
         else recyclerView.setAdapter(mAdapter);
 
         cached = true;
+
+        //Code for the floating action button
+        FloatingActionButton fabAddListing = view.findViewById(R.id.fabAddListing);
+        fabAddListing.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                NavHostFragment navHostFragment = (NavHostFragment) getActivity()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.fragment);
+                NavController controller = navHostFragment.getNavController();
+                controller.navigate(R.id.action_homeFragment_to_listingFragment);
+
+            }
+        });
         return view;
     }
 

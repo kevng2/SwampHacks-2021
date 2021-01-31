@@ -34,16 +34,5 @@ public class MainActivity extends AppCompatActivity {
         if (mNavHostFragment != null)
             mNavController =  mNavHostFragment.getNavController();
         NavigationUI.setupWithNavController(mBottomNavigationView, mNavController);
-
-        //Code for the floating action button
-        FloatingActionButton  fabAddListing = findViewById(R.id.fabAddListing);
-        fabAddListing.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(MainActivity.this,"FAB Clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
