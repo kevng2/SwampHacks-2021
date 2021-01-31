@@ -45,6 +45,7 @@
                 android:layout_marginLeft="70dp"
                 />
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cathy Yue"
@@ -65,6 +66,7 @@
                 android:layout_marginLeft="70dp"
                 />
             <TextView
+                android:id="@+id/tvEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="cathyy0061@gmail.com"

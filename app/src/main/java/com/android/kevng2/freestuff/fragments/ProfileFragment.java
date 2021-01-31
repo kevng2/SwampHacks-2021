@@ -13,12 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.kevng2.freestuff.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class ProfileFragment extends Fragment {
 
     Button btnSettings;
+    TextView tvName;
+    TextView tvEmail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,9 +33,16 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(getContext());
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         btnSettings = view.findViewById(R.id.btnSettings);
+        tvName = view.findViewById(R.id.tvName);
+        tvEmail = view.findViewById(R.id.tvEmail);
+
+        tvName.setText(signInAccount.getDisplayName());
+        tvEmail.setText(signInAccount.getEmail());
 
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
