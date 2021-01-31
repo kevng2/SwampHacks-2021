@@ -1,13 +1,10 @@
 package com.android.kevng2.freestuff.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.kevng2.freestuff.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class ProfileFragment extends Fragment {
-
+    private Button btnLogout;
     Button btnSettings;
     TextView tvName;
     TextView tvEmail;
@@ -38,6 +36,10 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         btnSettings = view.findViewById(R.id.btnSettings);
+        btnLogout = view.findViewById(R.id.log_out_btn);
+        btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+        });
         tvName = view.findViewById(R.id.tvName);
         tvEmail = view.findViewById(R.id.tvEmail);
 
