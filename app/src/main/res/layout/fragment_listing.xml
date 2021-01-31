@@ -98,16 +98,16 @@
         android:id="@+id/btnUpload"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="25dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginVertical="100dp"
+        android:layout_marginHorizontal="25dp"
         android:text="Item Photo" />
 
     <Button
         android:id="@+id/uploadItem"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="100dp"
         android:layout_marginHorizontal="25dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
