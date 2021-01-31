@@ -52,7 +52,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:text="@string/password" />
+            android:text="password" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -74,7 +74,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:text="@string/email" />
+            android:text="email" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -89,6 +89,6 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/change_settings" />
+        android:text="change_settings" />
 
 </LinearLayout>

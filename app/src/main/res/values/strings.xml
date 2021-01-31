@@ -11,6 +11,9 @@
     <string name="btn_pick_up">Pick Up</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="hello_world">Hello Square World!</string>
+    <string name="cathy_yue">cathy yue</string>
+    <string name="name">Name</string>
+
 
     <string-array name="conditions">
         <item>New</item>
